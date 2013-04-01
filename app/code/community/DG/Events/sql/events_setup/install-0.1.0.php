@@ -5,6 +5,7 @@
  * @author Daniel Golding
  */
 
+ 
 /**
  * @var $installer Mage_Core_Mage_Resource_Setup
  */
@@ -58,9 +59,7 @@ $table = $installer->getConnection()
         array('type' => Varien_Db_Adapter_Interface::INDEX_TYPE_INDEX)
     )
     ->setComment('Event item');
-// debug -- loud
-    echo "Installing:". get_class($this) . "\n";
-// debug
+
 $installer->getConnection()->createTable($table);
 
 $installer->endSetup();
