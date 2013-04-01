@@ -86,6 +86,10 @@ class DG_Events_Adminhtml_EventsController extends
         
     }
     
+    /**
+     * This is where we get sent after hitting save on the new/edit page
+     * saves our event
+     */
     public function saveAction() {
         $redirectPath = '*/*';
         $redirectParams = array();
@@ -130,8 +134,8 @@ class DG_Events_Adminhtml_EventsController extends
         }
         $this->_redirect($redirectPath, $redirectParams);
     }
-    /******     Not Finished Continue Here       ***********/
-    //TODO deleteAction() ... etc
+
+
     /**
      * Delete action
      * deletes a particular event
