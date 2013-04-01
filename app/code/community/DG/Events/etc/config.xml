@@ -87,4 +87,13 @@
             </updates>
         </layout>
     </adminhtml>
+
+    <default>
+        <events>
+            <view>
+                <enabled>1</enabled>
+                <items_per_page>20</items_per_page>
+            </view>
+        </events>
+    </default>
 </config>

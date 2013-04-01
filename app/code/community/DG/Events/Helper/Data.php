@@ -6,7 +6,20 @@
  */
 class DG_Events_Helper_Data extends Mage_Core_Helper_Data {
     
+    /**
+     * Path to store config is module is displayed on the frontend
+     *
+     * @var string
+     */
     const XML_PATH_ENABLED = 'events/view/enabled';
+
+    // Has not yet been implemented in the module
+    /**
+     * Path to store config where the number of events are displayed on a page
+     *
+     * @var string
+     */
+    const XML_PATH_ITEMS_PER_PAGE = 'events/view/items_per_page';
 
     // TODO change stores into a Model with a table in the database so that 
     // stores can be added and removed as the business changes (slash so this
@@ -20,7 +33,17 @@ class DG_Events_Helper_Data extends Mage_Core_Helper_Data {
      * @return boolean
      */
     public function isEnabled($store = null) {
-        return Mage::getStoreConfigFlag(self::XML_PATH_ENABLED);
+        return Mage::getStoreConfigFlag(self::XML_PATH_ENABLED, $store);
+    }
+
+    /**
+     * Returns the maximum number of events that should be displayed on a page
+     *
+     * @param integer|string|Mage_Core_Model_Store $store
+     */
+    public function getEventsPerPage($store=null) {
+        return abs((int) Mage::getStoreConfig(self::XML_PATH_ITEMS_PER_PAGE,
+            $store));
     }
 
     /**

@@ -9,7 +9,7 @@ class DG_Events_IndexController extends Mage_Core_Controller_Front_Action {
     public function preDispatch() {
         parent::preDispatch();
         
-        if (Mage::helper('events')->isEnabled()) {
+        if (!Mage::helper('events')->isEnabled()) {
             $this->setFlag('', 'no-dispatch', true);
             $this->_redirect('noRoute');
         }
