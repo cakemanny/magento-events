@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Global config file for the DG_Events module
+ *
+ * @author Daniel Golding
+ */
+-->
+<config>
+    <modules>
+        <DG_Events>
+            <active>true</active>
+            <codePool>community</codePool>
+        </DG_Events>
+    </modules>
+</config>

@@ -1,0 +1,36 @@
+<?php $events = $this->getEvents(); ?>
+<div class="event-month-header">
+    <div class="event-month-previous">
+        <a href="<?php echo $this->getPrevMonthURL(); ?>">Previous Month</a>
+    </div>
+    <h2><?php echo $this->getMonthName() . " - " . $this->getYear(); ?></h2>
+    <div class="event-month-next">
+        <a href="<?php echo $this->getNextMonthURL(); ?>">Next Month</a>
+    </div>
+</div>
+
+<?php foreach($events as $event): ?>
+    <div class="event-item">
+        <?php if ($image = $event->getImage()): ?>
+            <div class="event-image">
+                <img src="<?php echo $image; ?>" alt="<?php echo $event->getTitle(); ?>"/>
+            </div>
+        <?php endif; ?>
+        <div class="event-text">
+            <?php if ($destination = $event->getDestination()): ?>
+                <h3><a href="<?php echo $destination;?>"><?php echo $event->getTitle(); ?></a></h3>
+            <?php else: ?>
+                <h3><?php echo $event->getTitle(); ?></h3>
+            <?php endif; ?>
+            <h4>
+                <?php echo $event->getDate(); ?>
+                <?php foreach($event->getStoreNames() as $store): ?>
+                    -- <?php echo $store; ?>
+                <?php endforeach; ?>
+            </h4>
+            <div class="event-description">
+                <?php echo $event->getDescription(); ?>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

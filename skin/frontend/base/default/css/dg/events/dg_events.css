@@ -1,0 +1,45 @@
+/**
+ * Styles for the DG_Events Magento Extension
+ *
+ * @author Daniel Golding
+ */
+
+
+/* Styles for the page in general */
+.event-month-header {
+    text-align: center;
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+.event-month-header div, .event-month-header h2 {
+    padding: 15px 50px;
+    width: 33%;
+    display: table-cell;
+}
+
+
+/* Styles for each event item */
+.event-item {
+    clear: both;
+    border-bottom: 1px dotted silver;
+}
+.event-image {
+    float: left;
+    padding: 5px;
+}
+.event-image img {
+    width: 200px;
+}
+.event-text {
+ /*   float: left; */
+    padding: 5px;
+    padding-left: 250px;
+}
+.event-text  h4 {
+    font-size: 10px;
+}
+.event-cf {
+    clear: both;
+}
+

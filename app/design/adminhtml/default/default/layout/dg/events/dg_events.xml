@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Events Management backend layout
+ *
+ * @author Daniel Golding
+ */
+-->
+<layout>
+    <adminhtml_events_index>
+        <reference name="content">
+            <block type="events/adminhtml_events" name="events" />
+        </reference>
+    </adminhtml_events_index>
+
+    <adminhtml_events_grid>
+        <block type="events/adminhtml_events_grid" name="root" />
+    </adminhtml_events_grid>
+
+    <adminhtml_events_new>
+        <update handle="adminhtml_events_edit" />
+    </adminhtml_events_new>
+
+    <adminhtml_events_edit>
+        <update handle="editor" />
+        <reference name="content">
+            <block type="events/adminhtml_events_edit" name="events_edit" />
+        </reference>
+    </adminhtml_events_edit>
+</layout>
+

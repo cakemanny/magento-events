@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Admin config
+ *
+ * @author Daniel Golding
+ */
+ -->
+ <config>
+    <menu>
+        <events translate="title" module="events">
+            <title>Events</title>
+            <sort_order>65</sort_order>
+            <children>
+                <manage translate="title" module="events">
+                    <title>Manage Events</title>
+                    <action>adminhtml/events</action>
+                    <sort_order>50</sort_order>
+                </manage>
+                <new translate="title" module="events">
+                    <title>New Event</title>
+                    <action>adminhtml/events/new</action>
+                    <sort_order>75</sort_order>
+                </new>
+            </children>
+        </events>
+    </menu>
+    
+    <acl>
+        <resources>
+            <Admin>
+                <children>
+                    <events translate="title" modules="events">
+                        <title>Events</title>
+                        <sort_order>65</sort_order>
+                        <children>
+                            <manage translate="title">
+                                <title>Manage Events</title>
+                                <sort_order>0</sort_order>
+                                <children>
+                                    <save translate="title">
+                                        <title>Save Event</title>
+                                        <sort_order>0</sort_order>
+                                    </save>
+                                    <delete translate="title">
+                                        <title>Delete Event</title>
+                                        <sort_order>10</sort_order>
+                                    </delete>
+                                </children>
+                            </manage>
+                        </children>
+                    </events>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <events translate="title" module="events">
+                                        <title>Event Management</title>
+                                    </events>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </Admin>
+        </resources>
+    </acl>
+</config>
+                

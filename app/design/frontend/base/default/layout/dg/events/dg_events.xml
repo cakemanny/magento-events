@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Layout file for the frontend of the events module
+ * 
+ * @author Daniel Golding
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="top.links">
+            <action method="addLink" translate="label" module="page">
+                <label>Events</label>
+                <url>events</url>
+                <title>Events</title>
+                <prepare/>
+                <urlParams/>
+                <position>-1</position>
+            </action>
+        </reference>
+    </default>
+
+    <events_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="events/month" name="events" template="dg/events/month.phtml" />
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type><file>css/dg/events/dg_events.css</file>
+            </action>
+        </reference>
+    </events_index_index>
+</layout>
