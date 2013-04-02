@@ -37,7 +37,7 @@
                         <items_per_page translate="label">
                             <label>Events per Page</label>
                             <comment>Empty gives default of 20.</comment>
-                            <frontend_type>select</frontend_type>
+                            <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
                             <depends>
                                 <enabled>1</enabled>

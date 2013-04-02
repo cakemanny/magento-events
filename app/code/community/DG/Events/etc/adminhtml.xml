@@ -28,7 +28,10 @@
     
     <acl>
         <resources>
-            <Admin>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
                 <children>
                     <events translate="title" modules="events">
                         <title>Events</title>
@@ -62,7 +65,7 @@
                         </children>
                     </system>
                 </children>
-            </Admin>
+            </admin>
         </resources>
     </acl>
 </config>
