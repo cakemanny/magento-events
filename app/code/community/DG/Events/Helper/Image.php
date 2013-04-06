@@ -138,9 +138,43 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
      * @param integer $height
      * @return bool|string
      */
-    public function resize(DG_Events_Model_Event $event,
-            $width, $height=null) {
-        // TODO implement this and continue from here
+    public function resize(DG_Events_Model_Event $event, $width, $height=null) {
+        if (!$item->getImage()) {
+            return false;
+        }
+
+        if ($width < self::MIN_WIDTH || $width > self::MAX_WIDTH) {
+            return false;
+        }
+        $width = (int)  $width;
+
+        if (!is_null($height)) {
+            if ($height < self::MIN_HEIGHT || $height > self::MAX_HEIGHT) {
+                return false;
+            }
+            $height = (int) $height;
+        }
+
+        $imageFile = $event->getImage();
+        $cacheDir = $this->getBaseDir() . DS . 'cache' . DS . $width;
+        $cacheUrl = $this->getBaseUrl() . '/' . 'cache' . '/' . $width;
+
+        $io = new Varien_Io_File();
+        $io->checkAndCreateFolder($cacheDir);
+        $io->open(array('path' => $cacheDir));
+        if ($io->fileExists($imageFile)) {
+            return $cacheUrl . $imageFile;
+        }
+
+        try {
+            $image = new Varien_Image($this->getBaseDir() . DS . $imageFile);
+            $image->resize($width, $height);
+            $image->save($cacheDir . DS . $imageFile);
+            return $cacheUrl . $imageFile;
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return false;
+        }
     }
 
     /**

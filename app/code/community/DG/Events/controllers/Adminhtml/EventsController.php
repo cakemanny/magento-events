@@ -103,6 +103,7 @@ class DG_Events_Adminhtml_EventsController extends
             /** @var $model DG_Events_Model_Event */
             $model = Mage::getModel('events/event');
             
+            // if the events already exists, load it  
             $eventId = $this->getRequest()->getParam('event_id');
             if ($eventId) {
                 $model->load($eventId);
@@ -115,7 +116,7 @@ class DG_Events_Adminhtml_EventsController extends
                 $model->save();
                 $this->_getSession()->addSuccess(
                     Mage::helper('events')
-                    ->__('The event has been saved successfully')
+                    ->__('The event has been saved successfully.')
                 );
                 
                 if ($this->getRequest()->getParam('back')) {
@@ -126,6 +127,8 @@ class DG_Events_Adminhtml_EventsController extends
                     $redirectParams = array();
                 }
                 
+            } catch (Mage_Core_Exception $e) {
+                $this->_getSession()-addError($e->getMessage());
             } catch (Exception $e) {
                 $this->_getSession()->addException($e,
                     Mage::helper('events')
@@ -192,7 +195,7 @@ class DG_Events_Adminhtml_EventsController extends
             break;
         default:
             return Mage::getSingleton('Admin/session')
-                ->isAllowed('news/manage');
+                ->isAllowed('events/manage');
             break;
         }
     }
