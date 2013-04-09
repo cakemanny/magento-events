@@ -193,6 +193,3 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
     }
 }
 
-
-            
-
