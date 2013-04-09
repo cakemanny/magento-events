@@ -118,7 +118,7 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
                 Mage::throwException(Mage::helper('events')
                     ->__('Uploaded image is not valid'));
             }
-            $upload = new Varien_File_Uploaded($scope);
+            $upload = new Varien_File_Uploader($scope);
             $upload->setAllowCreateFolders(true);
             $upload->setAllowedExtensions($this->_allowedExtensions);
             $upload->setAllowRenameFiles(true);
@@ -192,4 +192,7 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
         return true;
     }
 }
+
+
+            
 

@@ -62,12 +62,7 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'name'      => 'store[]',
             'label'     => Mage::helper('events')->__('Store(s)'),
             'title'     => Mage::helper('events')->__('Store(s)'),
-            'values'    => array(
-                array('value' => '0', 'label' => Mage::helper('events')->__('Torquay')),
-                array('value' => '1', 'label' => Mage::helper('events')->__('Harrogate')),
-                array('value' => '2', 'label' => Mage::helper('events')->__('Wilmslow')),
-                array('value' => '3', 'label' => Mage::helper('events')->__('Tunbridge Wells')),
-            ),
+            'values'    => Mage::helper('events')->storesValueLabelArray(),
             'style'     => 'height: 100px;',
         ));
         
@@ -75,13 +70,22 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'name'      => 'destination',
             'label'     => Mage::helper('events')->__('Destination URL'),
             'title'     => Mage::helper('events')->__('Destination URL'),
-            'note'   => 'This is optional, but useful if the event has it\'s own page',
+            'note' => 'This is optional, but useful if the event has it\'s own page',
         ));
         
+        /*
         $fieldset->addField('image', 'text', array(
             'name'      => 'image',
             'label'     => Mage::helper('events')->__('Image'),
             'title'     => Mage::helper('events')->__('Image'),
+        ));
+        */
+        
+        $fieldset->addField('image', 'image', array(
+            'name'      => 'image',
+            'label'     => Mage::helper('events')->__('Image'),
+            'title'     => Mage::helper('events')->__('Image'),
+            'required'  => false,
         ));
 
         $dateFormatIso = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
@@ -95,10 +99,26 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'input_format' => Varien_Date::DATE_INTERNAL_FORMAT,
             'format'    => $dateFormatIso,
         ));
-
+        
+        // We dispatch an event that we can hook into in case we need to do any
+        // other work while preparing this form.
+        Mage::dispatchEvent('adminhtml_events_edit_form_prepare_form',
+            array('form' => $form));
+        
         $form->setValues($data);
 
         return parent::_prepareForm();
+    }
+    
+    /**
+     * Get our custom image form element type that loads from the right place
+     *
+     * @return array
+     */
+    protected function _getAdditionalElementTypes() {
+        return array('image' => Mage::getConfig()
+            ->getBlockClassName('events/adminhtml_events_edit_form_element_image')
+        );
     }
 }
 

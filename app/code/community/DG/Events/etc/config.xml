@@ -9,7 +9,7 @@
         <models>
             <events>
                 <class>DG_Events_Model</class>
-                <resourceModel>events_resource</resourceModel>
+                <resourceModel>events_mysql4</resourceModel>
             </events>
             <events_mysql4>
                 <class>DG_Events_Model_Mysql4</class>

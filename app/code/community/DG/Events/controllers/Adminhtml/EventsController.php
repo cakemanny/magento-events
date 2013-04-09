@@ -109,10 +109,40 @@ class DG_Events_Adminhtml_EventsController extends
                 $model->load($eventId);
             }
             
+            // Serialize the stores array so we can store it in a text field
+            // in our database
             $data['store'] = serialize($data['store']);
+            
+            // Extract the image because we don't want to store that in the DB
+            if (isset($data['image'])) {
+                $imageData = $data['image'];
+                unset($data['image']);
+            } else {
+                $imageData = array();
+            }
 
             $model->addData($data);
             try {
+                //== Try to save the image
+                /** @var $imageHelper DG_Events_Helper_Image */
+                $imageHelper = Mage::helper('events/image');
+                
+                // remove old image
+                if (isset($imageData['delete']) && $model->getImage()) {
+                    $imageHelper->removeImage($model->getImage());
+                    $model->setImage(null);
+                }
+                
+                // upload new image
+                $imageFile = $imageHelper->uploadImage('image');
+                if ($imageFile) {
+                    if ($model->getImage()) {
+                        $imageHelper->removeImage($model->getImage());
+                    }
+                    $model->setImage($imageFile);
+                }
+                
+                //= Save all the text data
                 $model->save();
                 $this->_getSession()->addSuccess(
                     Mage::helper('events')

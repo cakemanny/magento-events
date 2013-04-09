@@ -3,7 +3,7 @@
     <div class="event-month-previous">
         <a href="<?php echo $this->getPrevMonthURL(); ?>">Previous Month</a>
     </div>
-    <h2><?php echo $this->getMonthName() . " - " . $this->getYear(); ?></h2>
+    <h2><?php echo strtoupper($this->getMonthName()) . " " . $this->getYear(); ?></h2>
     <div class="event-month-next">
         <a href="<?php echo $this->getNextMonthURL(); ?>">Next Month</a>
     </div>
@@ -18,9 +18,9 @@
         <?php endif; ?>
         <div class="event-text">
             <?php if ($destination = $event->getDestination()): ?>
-                <h3><a href="<?php echo $destination;?>"><?php echo $event->getTitle(); ?></a></h3>
+                <h3><a href="<?php echo $destination;?>"><?php echo strtoupper($event->getTitle()); ?></a></h3>
             <?php else: ?>
-                <h3><?php echo $event->getTitle(); ?></h3>
+                <h3><?php echo strtoupper($event->getTitle()); ?></h3>
             <?php endif; ?>
             <h4>
                 <?php echo $event->getDate(); ?>

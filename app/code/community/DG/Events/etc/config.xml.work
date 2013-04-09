@@ -61,7 +61,7 @@
         <layout>
             <updates>
                 <events module="DG_Events">
-                    <file>dg/events/dg_events.xml</file>
+                    <file>dg_events.xml</file>
                 </events>
             </updates>
         </layout>
@@ -82,7 +82,7 @@
         <layout>
             <updates>
                 <events>
-                    <file>dg/events/dg_events.xml</file>
+                    <file>dg_events.xml</file>
                 </events>
             </updates>
         </layout>

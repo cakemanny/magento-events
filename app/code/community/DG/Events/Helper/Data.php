@@ -78,7 +78,7 @@ class DG_Events_Helper_Data extends Mage_Core_Helper_Data {
      * Return the full name of the month from its digits e.g. monthName('04')
      * = April
      *
-     * string|intger
+     * @param string|intger $month
      * @return string
      */
     public function monthName($month) {
@@ -97,5 +97,26 @@ class DG_Events_Helper_Data extends Mage_Core_Helper_Data {
         } else {
             return '';
         }
+    }
+    /**
+     * Returns an array of arrays like
+     * array(array('value'=0, 'label'='storename'), ...)
+     * @return array
+     */
+    public function storesValueLabelArray() {
+        $stores = $this->stores;
+        $output = array();
+        if (!is_null($stores)) {
+            $i = 0;
+            foreach ($stores as $store) {
+                $output[] = array(
+                    'value' => strval($i),
+                    'label' => $this->__($store),
+                );
+                
+                ++$i;
+            }
+        }
+        return $output;
     }
 }
