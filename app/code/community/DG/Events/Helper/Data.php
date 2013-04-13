@@ -52,7 +52,7 @@ class DG_Events_Helper_Data extends Mage_Core_Helper_Data {
      * @return array
      */
     public function getStores() {
-        return $stores;
+        return $this->stores;
     }
 
     /**

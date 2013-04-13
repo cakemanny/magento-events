@@ -4,8 +4,7 @@
  * @author Daniel Golding
  */
 
-
-/* Styles for the page in general */
+/* ==== Styles for the page in general ==== */
 .event-month-header {
     text-align: center;
     display: table;
@@ -18,21 +17,50 @@
     display: table-cell;
 }
 .event-month-header h2 {
-    font-family: 'PT Sans', Verdana, Helvetica, Tahoma, Arial, sans-serif;
+    font-family: 'Century Gothic', Verdana, Helvetica, Tahoma, Arial, sans-serif;
     font-weight: normal;
     font-size: 16px;
     font-style: italic;
 }
 
+/* ==== Styles for the store links at the top. ==== */
+#event-store-links {
+    display: table;
+    margin: auto;
+}
+#event-store-links > li {
+    float: left;
+    text-align: center;
+    padding: 20px;
+}
+#event-store-links em {
+    font-style: normal;
+    font-weight: bold;
+}
+#event-store-links a {
+    text-decoration: none;
+}
 
-/* Styles for each event item */
+/* ==== Styles for each event item ==== */
 .event-item {
-    clear: both;
+    /*clear: both;*/
     border-bottom: 1px dotted silver;
     height: 210px;
+    overflow: hidden;
 }
+#event-listing.event-two-col > .event-item {
+    float: left;
+    width: 471px;
+}
+#event-listing.event-one-col > .event-item {
+    clear: both;
+}
+/*
+.event-item:first-of-type {
+    border-top: 1px dotted silver;
+}*/
 .event-item h3 {
-    font-family: 'PT Sans', Verdana, Helvetica, Tahoma, Arial, sans-serif;
+    font-family: 'Century Gothic', Verdana, Helvetica, Tahoma, Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     margin-bottom: 3px;
@@ -45,9 +73,8 @@
     width: 200px;
 }
 .event-text {
- /*   float: left; */
     padding: 5px;
-    padding-left: 250px;
+    padding-left: 220px; /* This needs to give you enough width for your images*/
 }
 .event-text  h4 {
     font-size: 10px;

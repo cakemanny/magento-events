@@ -11,3 +11,7 @@ stores/locations.
 
 * Filter to see events location
 
+To install
+-----------
+Simply merge the app directory and the skin directory into the root of magento
+on your webserver.

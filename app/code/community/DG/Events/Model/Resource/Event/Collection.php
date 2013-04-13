@@ -37,6 +37,9 @@ class DG_Events_Model_Resource_Event_Collection extends
      * @return DG_Events_Model_Resource_Event_Collection
      */
     public function addStoreFilter($storeid) {
+        if (is_null($storeid))
+            return $this;
+        
         $storeid = intval($storeid);
         if ($storeid >= 0 && $storeid < count(Mage::helper('events')->getStores())) {
             $wherestring = sprintf('main_table.store LIKE %s',

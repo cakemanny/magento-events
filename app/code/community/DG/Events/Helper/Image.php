@@ -73,7 +73,7 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
      * @return string
      */
     public function getBaseDir() {
-        return Mage::getBaseDir('media') . DS . self::MEDIA_PATH;
+        return Mage::getBaseDir('media') . '/' . self::MEDIA_PATH;
     }
 
     /**
@@ -82,7 +82,8 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
      * @return string
      */
     public function getBaseUrl() {
-        return Mage::getBaseUrl('media') . '/' . self::MEDIA_PATH;
+        //return Mage::getBaseUrl('media') . '/' . self::MEDIA_PATH;
+        return Mage::getBaseUrl('media') . self::MEDIA_PATH;
     }
 
     /**
@@ -156,7 +157,7 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
         }
 
         $imageFile = $event->getImage();
-        $cacheDir = $this->getBaseDir() . DS . 'cache' . DS . $width;
+        $cacheDir = $this->getBaseDir() . '/' . 'cache' . '/' . $width;
         $cacheUrl = $this->getBaseUrl() . '/' . 'cache' . '/' . $width;
 
         $io = new Varien_Io_File();
@@ -167,9 +168,9 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
         }
 
         try {
-            $image = new Varien_Image($this->getBaseDir() . DS . $imageFile);
+            $image = new Varien_Image($this->getBaseDir() . '/' . $imageFile);
             $image->resize($width, $height);
-            $image->save($cacheDir . DS . $imageFile);
+            $image->save($cacheDir . '/' . $imageFile);
             return $cacheUrl . $imageFile;
         } catch (Exception $e) {
             Mage::logException($e);
@@ -184,7 +185,7 @@ class DG_Events_Helper_Image extends Mage_Core_Helper_Abstract {
      */
     public function flushImagesCache() {
 
-        $cacheDir = $this->getBaseDir() . DS . 'cache' . DS;
+        $cacheDir = $this->getBaseDir() . '/' . 'cache' . '/';
         $io = new Varien_Io_File();
         if ($io->fileExists($cacheDir, false)) {
             return $io->rmdir($cacheDir, true);

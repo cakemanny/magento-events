@@ -112,6 +112,7 @@ class DG_Events_Adminhtml_EventsController extends
             // Serialize the stores array so we can store it in a text field
             // in our database
             $data['store'] = serialize($data['store']);
+
             
             // Extract the image because we don't want to store that in the DB
             if (isset($data['image'])) {

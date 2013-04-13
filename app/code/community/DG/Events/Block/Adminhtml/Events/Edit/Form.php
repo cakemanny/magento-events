@@ -41,6 +41,8 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'legend' => Mage::helper('events')->__('Event Information'),
         ));
         
+        $this->_addElementTypes($fieldset);
+        
         $fieldset->addField('title', 'text', array(
             'name'      => 'title',
             'label'     => Mage::helper('events')->__('Title'),

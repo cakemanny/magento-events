@@ -8,10 +8,16 @@
         <a href="<?php echo $this->getNextMonthURL(); ?>">Next Month</a>
     </div>
 </div>
-
+<ul id="event-store-links">
+    <li><?php echo $this->getAllStoresLink("All Stores"); //You could enter text to replace ?></li>
+    <?php foreach($this->getStoreLinks() as $link): ?>
+    <li><?php echo $link; ?></li>
+    <?php endforeach; ?>
+</ul>
+<div id="event-listing" class="event-two-col">
 <?php foreach($events as $event): ?>
     <div class="event-item">
-        <?php if ($image = $event->getImage()): ?>
+        <?php if ($image = $event->getImageUrl()): ?>
             <div class="event-image">
                 <img src="<?php echo $image; ?>" alt="<?php echo $event->getTitle(); ?>"/>
             </div>
@@ -22,11 +28,16 @@
             <?php else: ?>
                 <h3><?php echo strtoupper($event->getTitle()); ?></h3>
             <?php endif; ?>
-            <h4>
-                <?php echo $event->getDate(); ?>
-                <?php foreach($event->getStoreNames() as $store): ?>
-                    -- <?php echo $store; ?>
-                <?php endforeach; ?>
+            <h4><?php /* Try getFormattedDate('d F') for full month, no year.
+                       * Look at http://www.php.net/manual/en/function.date.php
+                       * for all the different formatting options.
+                       */?>
+                <?php echo $event->getFormattedDate('d M Y'); ?>
+                <?php
+                    foreach($event->getStoreNames() as $store) {
+                        echo ' -- ' . $store;
+                    }
+                ?>
             </h4>
             <div class="event-description">
                 <?php echo $event->getDescription(); ?>
@@ -34,3 +45,4 @@
         </div>
     </div>
 <?php endforeach; ?>
+</div>

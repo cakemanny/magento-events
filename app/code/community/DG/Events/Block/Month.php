@@ -5,9 +5,33 @@
  * @author Daniel Golding
  */
 class DG_Events_Block_Month extends Mage_Core_Block_Template {
-    
+
     protected $_eventCollection = null;
-    
+
+    protected function _prepareLayout() {
+        // Add our breadcrumbs to to the top of the page
+        if ($breadcrumbs = $this->getLayout()->getBlock('breadcrumbs')) {
+            $breadcrumbs->addCrumb('home', array(
+                'label' => Mage::helper('events')->__('Home'),
+                'title' => Mage::helper('events')->__('Go to Home Page'),
+                'link' => Mage::getBaseUrl(),
+            ));
+            $breadcrumbs->addCrumb('events', array(
+                'label' => Mage::helper('events')->__('Events'),
+                'title' => Mage::helper('events')->__('See Events in All Stores'),
+                'link' => $this->getUrl('events'),
+            ));
+            if ($storename = $this->getStoreName()) {
+                $params = array('store' => $this->getStoreId());
+                $breadcrumbs->addCrumb('store', array(
+                    'label' => Mage::helper('events')->__($storename),
+                    'title' => Mage::helper('events')->__($storename),
+                    'link' => $this->getUrl('*/*/', $params),
+                ));
+            }
+        }
+    }
+
     /**
      * Returns the name of the current month being viewed
      *
@@ -42,7 +66,7 @@ class DG_Events_Block_Month extends Mage_Core_Block_Template {
             return Mage::helper('events')->getCurrentYear();
         }
     }
-    
+
     /**
      * @return DG_Events_Model_Resource_Event_Collection
      */
@@ -59,20 +83,16 @@ class DG_Events_Block_Month extends Mage_Core_Block_Template {
         $month = $this->getMonth();
         $year = $this->getYear();
         $storeid = $this->getRequest()->getParam('store');
-        
+
         if (is_null($this->_eventCollection)) {
             $this->_eventCollection = $this->_getCollection();
         }
-        
+
         $collection = $this->_eventCollection
                 ->addMonthFilter($month, $year)
+                ->addStoreFilter($storeid)
                 ->setOrder('date', 'asc');
 
-        // Only display the relevant stores information
-        if (!is_null($storeid)) {
-            $collection->addStoreFilter($storeid);
-        }
-        
         return $collection;
     }
 
@@ -95,13 +115,13 @@ class DG_Events_Block_Month extends Mage_Core_Block_Template {
         $params = array('_current' => true, 'month' => $month,
                 'year' => $year,);
 
-        if ($storeid = $this->getRequest()->getParam('store')) {
+        if ($storeid = $this->getStoreId()) {
             $params['store'] = $storeid;
         }
 
         return Mage::getUrl('*/*/', $params);
     }
-    
+
     /**
      * Returns the URL for the previous calendar month's events
      *
@@ -121,11 +141,82 @@ class DG_Events_Block_Month extends Mage_Core_Block_Template {
         $params = array('_current' => true, 'month' => $month,
                 'year' => $year,);
 
-        if ($storeid = $this->getRequest()->getParam('store')) {
+        if ($storeid = $this->getStoreId()) {
             $params['store'] = $storeid;
         }
 
         return Mage::getUrl('*/*/', $params);
     }
-    
+
+    /**
+     * Returns array of '<a>StoreName</a>' s. We return an array rather than an
+     * unordered list.
+     *
+     * @return array
+     */
+    public function getStoreLinks() {
+        $stores = Mage::helper('events')->getStores();
+
+        $params = array('_current' => true, 'month' => $this->getMonth(),
+                'year' => $this->getYear(),);
+
+        $current_store = $this->getRequest()->getParam('store');
+
+        $output = array();
+        foreach ($stores as $storeid => $store) {
+            $link = Mage::getUrl('*/*/', array_merge(
+                    $params, array('store' => $storeid)));
+            if (!is_null($current_store) && $current_store == $storeid)
+                $store = '<em>'.$store.'</em>';
+
+            $output[] = sprintf('<a href="%s">%s</a>',$link, $store);
+        } unset($store, $storeid);
+
+        return $output;
+    }
+
+    /**
+     * Save some typing; quick access to the storeid
+     *
+     * @return string|integer|null
+     */
+    public function getStoreId() {
+        return $this->getRequest()->getParam('store');
+    }
+
+    /**
+     * Save some typing; quick access to the storeid
+     *
+     * @return string|null
+     */
+    public function getStoreName() {
+        if (!is_null($storeid = $this->getStoreId())) {
+            $stores = Mage::helper('events')->getStores();
+            return $stores[$storeid];
+        }
+        return false;
+    }
+
+    /**
+     * Returns a link to get us back to all stores events. Text is "All Stores"
+     * by default
+     *
+     * @param string $text text to go in the link if you don't want "All Stores"
+     * @return string
+     */
+    public function getAllStoresLink($text = null) {
+        $params = array('month' => $this->getMonth(),
+                'year' => $this->getYear(), 'store' => '-1');
+        $link = Mage::getUrl('*/*/', $params);
+
+        if (is_null($text))
+            $text = 'All Stores';
+        if ($this->getStoreId() < 0 ||
+                $this->getStoreId() >= count(Mage::helper('events')->getStores()))
+            $text = '<em>'.$text.'</em>';
+
+        $output = sprintf('<a href="%s">%s</a>',$link, $text);
+
+        return $output;
+    }
 }
