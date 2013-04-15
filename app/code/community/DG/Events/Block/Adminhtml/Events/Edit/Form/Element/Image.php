@@ -23,4 +23,3 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form_Element_Image extends
     }
     
 }
-

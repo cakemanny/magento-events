@@ -9,7 +9,10 @@
     </div>
 </div>
 <ul id="event-store-links">
-    <li><?php echo $this->getAllStoresLink("All Stores"); //You could enter text to replace ?></li>
+    <li><?php /* This text, "All Stores", is the link text you see on the page
+               * Feel free to change it.
+               */
+        echo $this->getAllStoresLink("All Stores"); ?></li>
     <?php foreach($this->getStoreLinks() as $link): ?>
     <li><?php echo $link; ?></li>
     <?php endforeach; ?>
@@ -17,12 +20,13 @@
 <div id="event-listing" class="event-two-col">
 <?php foreach($events as $event): ?>
     <div class="event-item">
-        <?php if ($image = $event->getImageUrl()): ?>
+        <?php if ($image = $event->getImage()): ?>
             <div class="event-image">
-                <img src="<?php echo $image; ?>" alt="<?php echo $event->getTitle(); ?>"/>
+                <img src="<?php echo $event->getImageUrl(); ?>" alt="<?php echo $event->getTitle();?>"/>
             </div>
         <?php endif; ?>
-        <div class="event-text">
+        <?php $extraclass = ($image) ? "" : " event-noimage"; ?>
+        <div class="event-text<?php echo $extraclass; ?>">
             <?php if ($destination = $event->getDestination()): ?>
                 <h3><a href="<?php echo $destination;?>"><?php echo strtoupper($event->getTitle()); ?></a></h3>
             <?php else: ?>

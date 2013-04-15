@@ -6,7 +6,7 @@
  */
 class DG_Events_Block_Adminhtml_Events_Grid extends
         Mage_Adminhtml_Block_Widget_Grid {
-    
+
     /**
      * Initialise default properties
      */
@@ -18,7 +18,7 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
     }
-    
+
     /**
      * Prepare collection for grid
      *
@@ -29,7 +29,7 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
-    
+
     /**
      * Create the columns to appear on the manage events page
      */
@@ -40,19 +40,19 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
             'width'     => '50px',
             'index'     => 'event_id',
         ));
-        
+
         $this->addColumn('title', array(
             'header'    => Mage::helper('events')->__('Event Title'),
             'align'     => 'left',
             'index'     => 'title',
         ));
-        
+
         $this->addColumn('destination', array(
             'header'    => Mage::helper('events')->__('Destination Page'),
             'align'     => 'left',
             'index'     => 'destination',
         ));
-        
+
         $this->addColumn('date', array(
             'header'    => Mage::helper('events')->__('Event Date'),
             'align'     => 'right',
@@ -60,7 +60,7 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
             'index'     => 'date',
             'type'      => 'date',
         ));
-        
+
         $this->addColumn('action', array(
             'header'    => Mage::helper('events')->__('Action'),
             'align'     => 'left',
@@ -75,14 +75,18 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
             'index'     => 'event',
             'type'      => 'action',
         ));
-        
+
         return parent::_prepareColumns();
     }
-    
+
     public function getRowUrl($row) {
         return $this->getUrl('*/*/edit', array('event_id' => $row->getEventId()));
     }
-    
+
+    public function getGridUrl() {
+        return $this->getUrl('*/*/grid', array('_current' => true));
+    }
+
 }
-        
-        
+
+

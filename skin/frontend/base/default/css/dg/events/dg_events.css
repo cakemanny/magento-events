@@ -76,6 +76,9 @@
     padding: 5px;
     padding-left: 220px; /* This needs to give you enough width for your images*/
 }
+.event-noimage { /* we add this to the event-text if the event has no img */
+    padding-left: 5px;
+}
 .event-text  h4 {
     font-size: 10px;
     margin: 5px 0;

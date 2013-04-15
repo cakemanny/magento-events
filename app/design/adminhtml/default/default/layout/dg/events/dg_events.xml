@@ -14,7 +14,9 @@
     </adminhtml_events_index>
 
     <adminhtml_events_grid>
-        <block type="events/adminhtml_events_grid" name="root" />
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="events/adminhtml_events_grid" name="events_grid"/>
+        </block>
     </adminhtml_events_grid>
 
     <adminhtml_events_new>

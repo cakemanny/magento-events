@@ -66,6 +66,7 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'title'     => Mage::helper('events')->__('Store(s)'),
             'values'    => Mage::helper('events')->storesValueLabelArray(),
             'style'     => 'height: 100px;',
+            'note'      => 'Ctrl-Click to select more than one. (Cmd-Click on mac)',
         ));
         
         $fieldset->addField('destination', 'text', array(
