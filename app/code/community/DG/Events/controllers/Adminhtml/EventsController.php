@@ -159,7 +159,7 @@ class DG_Events_Adminhtml_EventsController extends
                 }
                 
             } catch (Mage_Core_Exception $e) {
-                $this->_getSession()-addError($e->getMessage());
+                $this->_getSession()->addError($e->getMessage());
             } catch (Exception $e) {
                 $this->_getSession()->addException($e,
                     Mage::helper('events')
