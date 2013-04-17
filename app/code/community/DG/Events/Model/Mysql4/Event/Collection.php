@@ -23,17 +23,14 @@ class DG_Events_Model_Mysql4_Event_Collection extends
         $firstdayofmonth = $year.'-'.$month.'-01' ;
         $firstdayofnextmonth = $year.'-'.$nextmonth.'-01';
 
-        $yesend = sprintf('enddate IS NOT NULL '
-            .'AND (date < %s AND enddate >= %s )',
-                $this->getConnection()->quote($firstdayofnextmonth),
-                $this->getConnection()->quote($firstdayofmonth)
-            );
-        $noend = sprintf('date >= %s AND date < %s',
+        $yesend = sprintf('(enddate IS NOT NULL AND enddate >= %s) '
+            .'OR date >= %s',
             $this->getConnection()->quote($firstdayofmonth),
-            $this->getConnection()->quote($firstdayofnextmonth));
+            $this->getConnection()->quote($firstdayofmonth)
+        );
         $this->getSelect()
-            ->where($noend)
-            ->orWhere($yesend);
+            ->where('date < ?', $firstdayofnextmonth)
+            ->where($yesend);
 
         return $this;
     }
