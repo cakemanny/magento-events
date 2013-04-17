@@ -2,7 +2,7 @@
 <config>
     <modules>
         <DG_Events>
-            <version>0.1.0</version>
+            <version>0.1.2</version>
         </DG_Events>
     </modules>
     <global>

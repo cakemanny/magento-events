@@ -14,7 +14,8 @@ CREATE TABLE {$installer->getTable('events/event')} (
     `date` date,
     `image` text,
     `store` varchar(255),
-    PRIMARY KEY (`event_id`)
+    PRIMARY KEY (`event_id`),
+    INDEX (`date`)
 );
 
 INSERT INTO {$installer->getTable('events/event')}

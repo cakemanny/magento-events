@@ -238,7 +238,7 @@ class DG_Events_Adminhtml_EventsController extends
      * @return array
      */
     protected function _filterPostData($data) {
-        $data = $this->_filterDates($data, array('date'));
+        $data = $this->_filterDates($data, array('date','enddate'));
         return $data;
     }
 

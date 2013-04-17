@@ -61,6 +61,15 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
             'type'      => 'date',
         ));
 
+        $this->addColumn('enddate', array(
+            'header'    => Mage::helper('events')->__('Event End Date'),
+            'align'     => 'right',
+            'sortable'  => true,
+            'index'     => 'enddate',
+            'type'      => 'date',
+        ));
+
+
         $this->addColumn('action', array(
             'header'    => Mage::helper('events')->__('Action'),
             'align'     => 'left',

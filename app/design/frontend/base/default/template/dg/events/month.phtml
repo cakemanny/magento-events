@@ -36,10 +36,14 @@
                        * Look at http://www.php.net/manual/en/function.date.php
                        * for all the different formatting options.
                        */?>
-                <?php echo $event->getFormattedDate('d M Y'); ?>
+                <?php
+                    echo $event->getFormattedDate('d M Y');
+                    if ($event->getEnddate()) {
+                        echo ' to ' . $event->getFormattedEnddate('d M Y');
+                    }?>
                 <?php
                     foreach($event->getStoreNames() as $store) {
-                        echo ' -- ' . $store;
+                        echo ' - ' . $store;
                     }
                 ?>
             </h4>

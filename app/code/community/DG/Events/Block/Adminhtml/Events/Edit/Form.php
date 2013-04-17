@@ -91,7 +91,8 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'required'  => false,
         ));
 
-        $dateFormatIso = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
+        $dateFormatIso = Mage::app()->getLocale()
+            ->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
         $fieldset->addField('date', 'date', array(
             'name'      => 'date',
             'label'     => Mage::helper('events')->__('Date of Event'),
@@ -99,6 +100,16 @@ class DG_Events_Block_Adminhtml_Events_Edit_Form extends
             'image'     => $this->getSkinUrl('images/grid-cal.gif'),
             'class'     => 'required-entry',
             'required'  => true,
+            'input_format' => Varien_Date::DATE_INTERNAL_FORMAT,
+            'format'    => $dateFormatIso,
+        ));
+
+        $fieldset->addField('enddate', 'date', array(
+            'name'      => 'enddate',
+            'label'     => Mage::helper('events')->__('Date Event Ends'),
+            'title'     => Mage::helper('events')->__('Date Event Ends'),
+            'image'     => $this->getSkinUrl('images/grid-cal.gif'),
+            'required'  => false,
             'input_format' => Varien_Date::DATE_INTERNAL_FORMAT,
             'format'    => $dateFormatIso,
         ));
