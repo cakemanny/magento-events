@@ -88,7 +88,7 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
                 ),
             ),
             'sortable'  => false,
-            'index'     => 'event',
+            'filter'    => false,
             'type'      => 'action',
         ));
 
