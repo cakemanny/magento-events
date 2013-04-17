@@ -66,11 +66,18 @@ class DG_Events_Block_Adminhtml_Events_Grid extends
             'align'     => 'left',
             'width'     => '100px',
             'getter'    => 'getEventId',
-            'actions'   => array(array(
+            'actions'   => array(
+                array(
                 'caption'   => Mage::helper('events')->__('Edit'),
                 'url'       => array('base' => '*/*/edit'),
                 'field'     => 'event_id',
-            )),
+                ),
+                array(
+                    'caption'   => Mage::helper('events')->__('Delete'),
+                    'url'       => array('base' => '*/*/delete'),
+                    'field'     => 'event_id',
+                ),
+            ),
             'sortable'  => false,
             'index'     => 'event',
             'type'      => 'action',

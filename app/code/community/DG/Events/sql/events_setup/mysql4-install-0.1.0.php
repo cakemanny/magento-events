@@ -19,7 +19,7 @@ CREATE TABLE {$installer->getTable('events/event')} (
 
 INSERT INTO {$installer->getTable('events/event')}
     (`event_id`, `title`, `description`, `destination`, `date`, `image`, `store`)
-    VALUES (NULL, 'Example Event', 'Example description of event', '/blog', '2013-03-05', '/media/wysiwyg/Blog/Screen_Shot_2013-02-15_at_14.36.26.png', 'Tunbridge Wells');
+    VALUES (NULL, 'Example Event', 'Example description of event', '/blog', '2013-03-05', '/media/wysiwyg/Blog/Screen_Shot_2013-02-15_at_14.36.26.png', 'a:1:{i:0;s:1:\"0\";}');
 ");
 
 $installer->endSetup();

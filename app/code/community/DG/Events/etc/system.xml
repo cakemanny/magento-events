@@ -24,6 +24,12 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
+                    <comment>
+                        <![CDATA[<div style="padding:10px;border:1px dashed black;background:white;margin-bottom:10px;">
+                            These settings do not behave. Hopefully they will in the next version, I leave them here in some sort of hope.<br/>
+                            Remember to contact me (Daniel Golding) at <a href="mailto:goldingd89@gmail.com">goldingd89@gmail.com</a> if you have any issues.
+                        </div>]]>
+                    </comment>
                     <fields>
                         <enabled translate="label">
                             <label>Enable</label>
