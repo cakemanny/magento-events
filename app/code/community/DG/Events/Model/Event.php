@@ -2,6 +2,16 @@
 /**
  * Event Model
  *
+ * @method integer getEventId()
+ * @method string getTitle()
+ * @method string getDescription()
+ * @method string getDestination()
+ * @method string getDate() date in YYYY-MM-DD format
+ * @method string getEnddate() date in YYYY-MM-DD format
+ * @method string getImage()
+ * @method string getStore() serialised array of storeids
+ * @method boolean getDisabled()
+ *
  * @author Daniel Golding
  */
 class DG_Events_Model_Event extends Mage_Core_Model_Abstract {
