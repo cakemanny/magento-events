@@ -113,13 +113,20 @@ class DG_Events_Adminhtml_EventsController extends
             // in our database
             $data['store'] = serialize($data['store']);
 
-            
+
             // Extract the image because we don't want to store that in the DB
             if (isset($data['image'])) {
                 $imageData = $data['image'];
                 unset($data['image']);
             } else {
                 $imageData = array();
+            }
+
+            // Funny thing with the end date, set null to clear
+            // - empty string gives unix epoch (no our event should not end in
+            // 1970!!
+            if (!$data['enddate']) {
+                $data['enddate'] = null;
             }
 
             $model->addData($data);
