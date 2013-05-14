@@ -1,0 +1,56 @@
+<?php $daysbeingviewed = 30; $events = $this->getEvents($daysbeingviewed); ?>
+<div class="event-month-header">
+    <div class="event-month-previous">
+        <a href="<?php echo $this->getPrevMonthURL(); ?>">Previous Month</a>
+    </div><!-- Change the following text to what you want it to say -->
+    <h2>THE NEXT <?php echo $daysbeingviewed; ?> DAYS AT HOOPERS</h2>
+    <div class="event-month-next">
+        <a href="<?php echo $this->getNextMonthURL(); ?>">Next Month</a>
+    </div>
+</div>
+<ul id="event-store-links">
+    <li><?php /* This text, "All Stores", is the link text you see on the page
+               * Feel free to change it.
+               */
+        echo $this->getAllStoresLink("All Stores"); ?></li>
+    <?php foreach($this->getStoreLinks() as $link): ?>
+    <li><?php echo $link; ?></li>
+    <?php endforeach; ?>
+</ul>
+<div id="event-listing" class="event-two-col">
+<?php foreach($events as $event): ?>
+    <div class="event-item">
+        <?php if ($image = $event->getImage()): ?>
+            <div class="event-image">
+                <img src="<?php echo $event->getImageUrl(); ?>" alt="<?php echo $event->getTitle();?>"/>
+            </div>
+        <?php endif; ?>
+        <?php $extraclass = ($image) ? "" : " event-noimage"; ?>
+        <div class="event-text<?php echo $extraclass; ?>">
+            <?php if ($destination = $event->getDestination()): ?>
+                <h3><a href="<?php echo $destination;?>"><?php echo strtoupper($event->getTitle()); ?></a></h3>
+            <?php else: ?>
+                <h3><?php echo strtoupper($event->getTitle()); ?></h3>
+            <?php endif; ?>
+            <h4><?php /* Try getFormattedDate('d F') for full month, no year.
+                       * Look at http://www.php.net/manual/en/function.date.php
+                       * for all the different formatting options.
+                       */?>
+                <?php
+                    echo $event->getFormattedDate('d M Y');
+                    if ($event->getEnddate()) {
+                        echo ' to ' . $event->getFormattedEnddate('d M Y');
+                    }?>
+                <?php
+                    foreach($event->getStoreNames() as $store) {
+                        echo ' - ' . $store;
+                    }
+                ?>
+            </h4>
+            <div class="event-description">
+                <?php echo $event->getDescription(); ?>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>

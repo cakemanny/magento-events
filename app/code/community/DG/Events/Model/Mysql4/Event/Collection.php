@@ -35,6 +35,24 @@ class DG_Events_Model_Mysql4_Event_Collection extends
         return $this;
     }
 
+    public function addUpcomingEventsFilter($days) {
+
+        $futuretime = time() + ($days * 24 * 60 * 60);
+        $today = date('Y-m-d');
+        $future = date('Y-m-d', $futuretime);
+
+        $yesend = sprintf('(enddate IS NOT NULL AND enddate >= %s) '
+            .'OR date >= %s',
+            $this->getConnection()->quote($today),
+            $this->getConnection()->quote($today)
+        );
+        $this->getSelect()
+            ->where('date < ?', $future)
+            ->where($yesend); // What a silly var name I know
+
+        return $this;
+    }
+
     /**
      * Filters the event by the store number defined in the helper module
      *

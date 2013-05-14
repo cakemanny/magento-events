@@ -24,4 +24,14 @@ class DG_Events_IndexController extends Mage_Core_Controller_Front_Action {
 		$this->renderLayout();
 
     }
+
+    /**
+     * The rolling update, shows the events that are upcoming
+     * By default this is 30 days
+     */
+    public function rollingAction() {
+
+        $this->loadLayout();
+        $this->renderLayout();
+    }
 }
