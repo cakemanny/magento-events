@@ -91,7 +91,7 @@ class DG_Events_Block_Rolling extends Mage_Core_Block_Template {
         $collection = $this->_eventCollection
                 ->addUpcomingEventsFilter($days)
                 ->addStoreFilter($storeid)
-                ->setOrder('date', 'desc');
+                ->setOrder('date', 'asc');
 
         return $collection;
     }
