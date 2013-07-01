@@ -187,12 +187,13 @@ class DG_Events_Block_Month extends Mage_Core_Block_Template {
     /**
      * Save some typing; quick access to the storename
      *
-     * @return string|null
+     * @return string|null|false
      */
     public function getStoreName() {
-        if (!is_null($storeid = $this->getStoreId()) && $storeid >= 0) {
+        if (!is_null($storeid = $this->getStoreId())) {
             $stores = Mage::helper('events')->getStores();
-            return $stores[$storeid];
+            if (array_key_exists($storeid, $stores))
+                return $stores[$storeid];
         }
         return false;
     }
