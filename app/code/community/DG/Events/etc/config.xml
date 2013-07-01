@@ -81,9 +81,9 @@
     <adminhtml>
         <layout>
             <updates>
-                <events>
+                <dg_events>
                     <file>dg/events/dg_events.xml</file>
-                </events>
+                </dg_events>
             </updates>
         </layout>
     </adminhtml>
